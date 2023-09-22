@@ -1,6 +1,6 @@
 # QCfinancial
 
-![logo](./images/qcfinancial_horizontal.png)
+![logo](./images/qcfinancial_horizontal_fondo_gris.png)
 
 ---
 
