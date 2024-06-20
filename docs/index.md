@@ -1,16 +1,16 @@
-# QCfinancial
+# Introducción
 
-![logo](./images/qcfinancial_horizontal_fondo_gris.png)
+![logo](./images/qcfinancial_horizontal.png)
 
 ---
 
 **Documentación**: <a href="https://qcfinancial.github.io/qcfinancial-docs" target="_blank">https://qcfinancial.github.io/qcfinancial-docs</a>
 
-**Código Fuente**: <a href="https://github.com/qcfinancial/qcfinancial" target="_blank">https://github.com/qcfinancial/qcfinancial</a>
+**Ejemplos de Uso**: <a href="https://qcf-demo-app.streamlit.app" target="_blank">https://github.com/qcfinancial/qcfinancial</a>. Una app <a  href="https://streamlit.io" target="_blank">streamlit</a> en pleno desarrollo 
 
 ---
 
-QCfinancial es una librería para la valorización de derivados de tasa de interés y tipo de cambio. Son características principales son:
+`qcfinancial` es una librería Python para la valorización de derivados de tasa de interés y tipo de cambio. Sus características principales son:
 
 - Rápida: el core de cálculo está escrito en C++.
 - Fácil de usar: conceptos sencillos y directos que permiten una rápida adaptación a muchos casos de uso.
@@ -18,4 +18,4 @@ QCfinancial es una librería para la valorización de derivados de tasa de inter
 
 ## Utilización
 
-QCfinancial se ha usado en producción por varios años ya y sigue mejorando y agregando funcionalidad.
+`qcfinancial` se ha usado en producción por varios años y sigue mejorando y agregando funcionalidad.
