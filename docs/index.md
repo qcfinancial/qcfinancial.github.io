@@ -6,7 +6,7 @@
 
 **Documentación**: <a href="https://qcfinancial.github.io/qcfinancial-docs" target="_blank">https://qcfinancial.github.io/qcfinancial-docs</a>
 
-**Ejemplos de Uso**: <a href="https://qcf-demo-app.streamlit.app" target="_blank">https://github.com/qcfinancial/qcfinancial</a>. Una app <a  href="https://streamlit.io" target="_blank">streamlit</a> en pleno desarrollo 
+**Ejemplos de Uso**: <a href="https://qcf-demo-app.streamlit.app" target="_blank">https://qcf-demo-app.streamlit.app</a>. Una app <a  href="https://streamlit.io" target="_blank">streamlit</a> en pleno desarrollo 
 
 ---
 
