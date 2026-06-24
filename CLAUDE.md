@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-The public landing page for **qcfinancial** — an open-source Python library (C++ core) for valuation and risk of linear interest-rate & FX derivatives, with strong Chilean-market support (ICP CLP, CLF/UF, Cámara) plus developed markets (SOFR, OIS, IRS, XCCY, FX forwards). It is a **static, build-less, bilingual (ES default / EN) single page** published to `https://qcfinancial.github.io/` via GitHub Pages.
+The public landing page for **qcfinancial** — an open-source Python library (C++ core) for valuation and risk of linear interest-rate & FX derivatives, with strong Chilean-market support (ICP CLP, CLF/UF, Cámara) plus developed markets (SOFR, OIS, IRS, XCCY, FX forwards). It is a **static, build-less, bilingual (ES default / EN) single page** published via GitHub Pages. The canonical URL is `https://qcfinancial.cl/` (apex custom domain); `https://www.qcfinancial.cl/` redirects to it, and the underlying `https://qcfinancial.github.io/` still resolves.
 
 The documentation lives in a **separate** site at `https://qcfinancial.github.io/qcfinancial-docs` — this repo only links out to it.
 
@@ -17,6 +17,7 @@ Plain HTML/CSS/vanilla JS — **no framework, no build step, no package manager.
 - `app.js` — all behavior, wrapped in one IIFE. Holds the bilingual `T` dictionary and `genMC()` (both copied **verbatim** from the original prototype — preserve them if editing).
 - `brand/` — logo/favicon/social-card assets (SVG / PNG / ICO). The ℚℂ mark is rendered from these assets, never a web font.
 - `robots.txt`, `sitemap.xml`, `.nojekyll` — crawl directives + Pages config.
+- `CNAME` — single line `qcfinancial.cl`; tells GitHub Pages the custom domain. Don't delete it or the apex domain unbinds.
 - `design/landing-spec.md` — the original high-fidelity design handoff; the source of truth for tokens, layout, and copy. Consult it before changing visual design.
 
 ## Develop / preview
@@ -38,6 +39,8 @@ python3 -m http.server 8000   # then open http://localhost:8000
 ## Hosting
 
 GitHub Pages serves directly from the `main` branch **root** (no Action, no `gh-pages` build). `.nojekyll` stops Jekyll from processing files. There is no CI; pushing to `main` publishes.
+
+**Custom domain.** The site is served at the apex `qcfinancial.cl` via the `CNAME` file, with **Enforce HTTPS** on (GitHub-provisioned Let's Encrypt cert). DNS is hosted on **Cloudflare** (NIC Chile is only the registrar, with its nameservers delegated to Cloudflare). Records: four `A` + four `AAAA` on the apex → GitHub Pages IPs, `www` `CNAME` → `qcfinancial.github.io`, plus a `_github-pages-challenge-qcfinancial` TXT for domain verification. Cloudflare records are kept **"DNS only" (grey cloud), not proxied** — proxying breaks GitHub's HTTPS cert flow; if ever proxied, Cloudflare SSL/TLS mode must be "Full".
 
 ## Spec workflow
 
