@@ -85,12 +85,12 @@
   /* ---- Per-language document metadata (title + description) ---- */
   var DOC_META = {
     en: {
-      title: 'qcfinancial — Valuation of linear interest rate & FX derivatives',
-      description: 'Open-source Python library with a C++ core for pricing and risk of linear interest-rate and FX derivatives. Built for the Chilean market and developed markets alike.'
+      title: 'qcfinancial — Valuation of linear rate & FX derivatives',
+      description: 'Open-source Python library with a C++ core for pricing and risk of linear interest-rate and FX derivatives. Built for the Chilean market.'
     },
     es: {
-      title: 'qcfinancial — Valorización de derivados de tasa de interés y FX',
-      description: 'Librería Python open source con core en C++ para la valorización y sensibilidad de derivados lineales de tasa de interés y tipo de cambio. Pensada para el mercado chileno y los mercados desarrollados.'
+      title: 'qcfinancial — Valorización de derivados de tasa y FX',
+      description: 'Librería Python open source con core en C++ para valorizar derivados de tasa de interés y FX. Soporte de primera clase para el mercado chileno.'
     }
   };
 
