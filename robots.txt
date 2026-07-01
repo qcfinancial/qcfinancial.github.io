@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://qcfinancial.github.io/sitemap.xml
+Sitemap: https://qcfinancial.cl/sitemap.xml
