@@ -97,9 +97,9 @@
   var COPY_LABELS = { en: 'copied!', es: '¡copiado!' };
 
   /* ---- Monte-Carlo generator (verbatim from prototype) ---- */
-  function genMC() {
+  function genMC(seedArg) {
     var W = 1200, H = 640, N = 26, steps = 60;
-    var seed = 137731;
+    var seed = (typeof seedArg === 'number') ? (seedArg >>> 0) : 137731;
     var rand = function () { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
     var gauss = function () { var u = 0, v = 0; while (u === 0) u = rand(); while (v === 0) v = rand(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
     var x0 = -30, x1 = 1230, y0 = H * 0.64;
@@ -139,10 +139,11 @@
 
   var SVG_NS = 'http://www.w3.org/2000/svg';
 
-  function renderMC() {
-    var svg = document.querySelector('[data-mc]');
-    if (!svg) return;
-    var mc = genMC();
+  // Build one generation of MC paths inside a <g> so the whole set can be
+  // faded out as a unit during a replay crossfade.
+  function buildMCGroup(seed) {
+    var g = document.createElementNS(SVG_NS, 'g');
+    var mc = genMC(seed);
     mc.paths.forEach(function (p) {
       var path = document.createElementNS(SVG_NS, 'path');
       path.setAttribute('d', p.d);
@@ -152,7 +153,7 @@
       path.setAttribute('stroke-opacity', p.opacity);
       path.setAttribute('stroke-linejoin', 'round');
       path.setAttribute('style', p.style);
-      svg.appendChild(path);
+      g.appendChild(path);
     });
     var meanPath = document.createElementNS(SVG_NS, 'path');
     meanPath.setAttribute('d', mc.mean);
@@ -162,7 +163,36 @@
     meanPath.setAttribute('stroke-opacity', '0.92');
     meanPath.setAttribute('stroke-linejoin', 'round');
     meanPath.setAttribute('style', 'opacity: 0; animation: qcMC 1.6s ease 1s forwards;');
-    svg.appendChild(meanPath);
+    g.appendChild(meanPath);
+    return g;
+  }
+
+  function renderMC(seed) {
+    var svg = document.querySelector('[data-mc]');
+    if (!svg) return;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.appendChild(buildMCGroup(seed));
+  }
+
+  // Crossfade: draw the new generation (fades in via qcMC) while fading the
+  // previous one out, then remove the old nodes once they're invisible.
+  function replayMC(seed) {
+    var svg = document.querySelector('[data-mc]');
+    if (!svg) return;
+    var old = [];
+    for (var i = 0; i < svg.childNodes.length; i++) {
+      if (svg.childNodes[i].nodeType === 1) old.push(svg.childNodes[i]);
+    }
+    svg.appendChild(buildMCGroup(seed));
+    old.forEach(function (node) {
+      node.style.transition = 'opacity 1.4s ease';
+      node.style.opacity = '0';
+    });
+    setTimeout(function () {
+      old.forEach(function (node) {
+        if (node.parentNode === svg) svg.removeChild(node);
+      });
+    }, 1600);
   }
 
   /* ---- Language ---- */
@@ -252,8 +282,19 @@
     });
   }
 
+  function initMCReplay() {
+    // Re-run the Monte-Carlo simulation every 30s with a fresh seed, unless the
+    // visitor prefers reduced motion.
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduce && reduce.matches) return;
+    setInterval(function () {
+      replayMC((Date.now() * 2654435761) >>> 0);
+    }, 30000);
+  }
+
   function init() {
     renderMC();
+    initMCReplay();
     initToggle();
     initCopy();
     initMobileNav();
