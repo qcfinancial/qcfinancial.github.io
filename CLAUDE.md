@@ -18,7 +18,7 @@ Plain HTML/CSS/vanilla JS — **no framework, no build step, no package manager.
 - `brand/` — logo/favicon/social-card assets (SVG / PNG / ICO). The ℚℂ mark is rendered from these assets, never a web font.
 - `robots.txt`, `sitemap.xml` — crawl directives (both reference the canonical `https://qcfinancial.cl/`).
 - `.nojekyll` — inert leftover from GitHub Pages (stopped Jekyll processing). Harmless on Cloudflare Pages; no longer functional.
-- `CNAME` — single line `qcfinancial.cl`; inert leftover from GitHub Pages. On Cloudflare Pages the custom domain is bound in the Pages dashboard, not by this file, so it's just a served static file now. Safe to delete, but harmless.
+- No `CNAME` file — it was a GitHub Pages artifact and has been removed. On Cloudflare Pages the custom domain is bound in the Pages dashboard, not by a repo file. Don't re-add one; it would just be served as a stray static file and does nothing for the domain.
 - `design/landing-spec.md` — the original high-fidelity design handoff; the source of truth for tokens, layout, and copy. Consult it before changing visual design.
 
 ## Develop / preview
